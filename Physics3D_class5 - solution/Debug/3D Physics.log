@@ -1,0 +1,15 @@
+﻿  Application.cpp
+  Generating Code...
+  Compiling...
+  ModuleWindow.cpp
+  ModuleSceneIntro.cpp
+  ModuleRenderer3D.cpp
+  ModulePlayer.cpp
+  ModulePhysics3D.cpp
+  ModuleInput.cpp
+  ModuleCamera3D.cpp
+  ModuleAudio.cpp
+  Main.cpp
+  Generating Code...
+  3D Physics.vcxproj -> C:\Users\nico\Desktop\2ndo VJ\FISICA\3D_Physics-master\Physics3D_class5 - solution\Debug\3D Physics - class5.exe
+  3D Physics.vcxproj -> C:\Users\nico\Desktop\2ndo VJ\FISICA\3D_Physics-master\Physics3D_class5 - solution\Debug\3D Physics - class5.pdb (Full PDB)
