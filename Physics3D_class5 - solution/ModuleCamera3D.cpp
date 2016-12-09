@@ -64,6 +64,8 @@ update_status ModuleCamera3D::Update(float dt)
 	//Position = App->player->vehicle;
 
 	btVector3 temp = App->player->vehicle->vehicle->getChassisWorldTransform().getOrigin();
+	
+	
 	Position.x = temp.getX();
 	Position.y = temp.getY();
 	Position.z = temp.getZ();
@@ -82,21 +84,20 @@ update_status ModuleCamera3D::Update(float dt)
 
 	//Get Rotation Matrix
 
-	R[0] = q0*q0 + q1*q1 - q2*q2 - q3*q3;
-	R[1] = 2 * q1*q2 + 2 * q0*q3;
-	R[2] = 2 * q1*q3 - 2 * q0*q2;
-	R[3] = 2 * q1*q2 - 2 * q0*q3;
-	R[4] = q0*q0 - q1*q1 + q2*q2 - q3*q3;
-	R[5] = 2 * q2*q3 + 2 * q0*q1;
-	R[6] = 2 * q1*q3 + 2 * q0*q2;
-	R[7] = 2 * q2*q3 - 2 * q0*q1;
-	R[8] = q0*q0 - q1*q1 - q2*q2 + q3*q3;
+	R[0] = (q0*q0 + q1*q1 - q2*q2 - q3*q3);
+	R[1] = (2 * q1*q2 + 2 * q0*q3);
+	R[2] = (2 * q1*q3 - 2 * q0*q2);
+	R[3] = (2 * q1*q2 - 2 * q0*q3);
+	R[4] = (q0*q0 - q1*q1 + q2*q2 - q3*q3);
+	R[5] = (2 * q2*q3 + 2 * q0*q1);
+	R[6] = (2 * q1*q3 + 2 * q0*q2);
+	R[7] = (2 * q2*q3 - 2 * q0*q1);
+	R[8] = (q0*q0 - q1*q1 - q2*q2 + q3*q3);
 
 	R = transpose(R);
 
-
 	
-
+	
 
 	// Mouse motion ----------------
 
