@@ -59,31 +59,34 @@ update_status ModuleCamera3D::Update(float dt)
 	if(App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) newPos += X * speed;
 
 	Position += newPos;
-	Reference += newPos;*/
-
+	Reference += newPos;
+	*/
 	//Position = App->player->vehicle;
-
 	btVector3 temp = App->player->vehicle->vehicle->getChassisWorldTransform().getOrigin();
-	
-	
+	//App->player->vehicle->vehicle->getChassisWorldTransform().getBasis();
+
+	float* tempC = new float[16];
+	App->player->vehicle->vehicle->getChassisWorldTransform().getOpenGLMatrix(tempC);
+
+	mat3x3 C(tempC[0], tempC[1], tempC[2], tempC[4], tempC[5], tempC[6], tempC[8], tempC[9], tempC[10]);
+
 	Position.x = temp.getX();
 	Position.y = temp.getY();
 	Position.z = temp.getZ();
+
+	Position += C*vec3(0, 3, 10);
+
+
+
 	btQuaternion qtemp = App->player->vehicle->vehicle->getChassisWorldTransform().getRotation();
 	float angle = qtemp.getAngle();
 	float q0 = qtemp.getW();
 	float q1 = qtemp.getX();
 	float q2 = qtemp.getY();
 	float q3 = qtemp.getZ();
-	//vec3 axis(qtemp.getAxis().getX(), qtemp.getAxis().getY(), qtemp.getAxis().getZ());
-
-	X = vec3(q0*q0 + q1*q1 - q2*q2 - q3*q3, 2 * q1*q2 - 2 * q0*q3, 2 * q1*q3 + 2 * q0*q2);
-	Y = vec3(2 * q1*q2 + 2 * q0*q3, q0*q0 - q1*q1 + q2*q2 - q3*q3, 2 * q2*q3 - 2 * q0*q1);
-	Z = vec3(2 * q1*q3 - 2 * q0*q2, 2 * q2*q3 + 2 * q0*q1, q0*q0 - q1*q1 - q2*q2 + q3*q3);
-
+	//vec3 axis(qtemp.getAxis().getX(), qtemp.getAxis().getY(), qtemp.getAxis().getZ())
 
 	//Get Rotation Matrix
-
 	R[0] = (q0*q0 + q1*q1 - q2*q2 - q3*q3);
 	R[1] = (2 * q1*q2 + 2 * q0*q3);
 	R[2] = (2 * q1*q3 - 2 * q0*q2);
@@ -95,13 +98,16 @@ update_status ModuleCamera3D::Update(float dt)
 	R[8] = (q0*q0 - q1*q1 - q2*q2 + q3*q3);
 
 	R = transpose(R);
+	
+	//Saving in case we need them later
+	X = vec3(R[0], R[3], R[6]);
+	Y = vec3(R[1], R[4], R[7]);
+	Z = vec3(R[2], R[5], R[8]);
 
-	
-	
 
 	// Mouse motion ----------------
-
-	/*if(App->input->GetMouseButton(SDL_BUTTON_RIGHT) == KEY_REPEAT)
+	/*
+	if(App->input->GetMouseButton(SDL_BUTTON_RIGHT) == KEY_REPEAT)
 	{
 		int dx = -App->input->GetMouseXMotion();
 		int dy = -App->input->GetMouseYMotion();
@@ -192,7 +198,7 @@ float* ModuleCamera3D::GetViewMatrix()
 // -----------------------------------------------------------------
 void ModuleCamera3D::CalculateViewMatrix()
 {
-	//ViewMatrix = mat4x4(X.x, Y.x, Z.x, 0.0f, X.y, Y.y, Z.y, 0.0f, X.z, Y.z, Z.z, 0.0f, -dot(X, Position), -dot(Y, Position), -dot(Z, Position), 1.0f);
-	ViewMatrix = mat4x4(R[0], R[1] , R[2], 0.0f, R[3], R[4], R[5], 0.0f, R[6], R[7], R[8], 0.0f, -dot(vec3(R[0],R[3],R[6]), Position), -dot(vec3(R[1], R[4], R[7]), Position), -dot(vec3(R[2], R[5], R[8]), Position), 1.0f);
+	ViewMatrix = mat4x4(X.x, Y.x, Z.x, 0.0f, X.y, Y.y, Z.y, 0.0f, X.z, Y.z, Z.z, 0.0f, -dot(X, Position), -dot(Y, Position), -dot(Z, Position), 1.0f);
+	//ViewMatrix = mat4x4(R[0], R[1] , R[2], 0.0f, R[3], R[4], R[5], 0.0f, R[6], R[7], R[8], 0.0f, -dot(vec3(R[0],R[3],R[6]), Position), -dot(vec3(R[1], R[4], R[7]), Position), -dot(vec3(R[2], R[5], R[8]), Position), 1.0f);
 	ViewMatrixInverse = inverse(ViewMatrix);
 }
