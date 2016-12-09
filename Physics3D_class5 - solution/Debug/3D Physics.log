@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿  ModuleWindow.cpp
 c:\users\nico\desktop\2ndo vj\fisica\bullet3dcargame_joanpareja_nicobabot\physics3d_class5 - solution\modulesceneintro.h(57): error C2065: 'btPoint2PointConstraint': undeclared identifier
 c:\users\nico\desktop\2ndo vj\fisica\bullet3dcargame_joanpareja_nicobabot\physics3d_class5 - solution\modulesceneintro.h(57): error C2923: 'p2DynArray': 'btPoint2PointConstraint' is not a valid template type argument for parameter 'VALUE'
@@ -35,3 +36,8 @@ c:\users\nico\desktop\2ndo vj\fisica\bullet3dcargame_joanpareja_nicobabot\physic
 c:\users\nico\desktop\2ndo vj\fisica\bullet3dcargame_joanpareja_nicobabot\physics3d_class5 - solution\modulesceneintro.h(57): error C2065: 'btPoint2PointConstraint': undeclared identifier
 c:\users\nico\desktop\2ndo vj\fisica\bullet3dcargame_joanpareja_nicobabot\physics3d_class5 - solution\modulesceneintro.h(57): error C2923: 'p2DynArray': 'btPoint2PointConstraint' is not a valid template type argument for parameter 'VALUE'
   Generating Code...
+=======
+﻿  ModuleCamera3D.cpp
+  3D Physics.vcxproj -> H:\Universitat\3r semestre\Fisica II\Bullet3DCarGame_JoanPareja_NicoBabot\Physics3D_class5 - solution\Debug\3D Physics - class5.exe
+  3D Physics.vcxproj -> H:\Universitat\3r semestre\Fisica II\Bullet3DCarGame_JoanPareja_NicoBabot\Physics3D_class5 - solution\Debug\3D Physics - class5.pdb (Full PDB)
+>>>>>>> origin/master
