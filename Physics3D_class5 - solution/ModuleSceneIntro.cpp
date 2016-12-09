@@ -23,9 +23,10 @@ bool ModuleSceneIntro::Start()
 	
 	//--
 	cub1.size.x = 8;
-	cub1.size.z = 200;
-	bodcub1 = App->physics->AddBody(cub1, 1000);
-	bodcub1->SetPos(1, 0, 2);
+	cub1.size.z = 100;
+	cub1.SetRotation(10, vec3(1, 0, 0));
+	bodcub1 = App->physics->AddBody(cub1, 0);
+	bodcub1->SetPos(0.5, 8.5, 55);
 
 	cub2.size.x = 8;
 	cub2.size.z = 200;
