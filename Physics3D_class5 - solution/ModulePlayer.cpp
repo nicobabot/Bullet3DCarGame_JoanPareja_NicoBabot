@@ -101,15 +101,20 @@ bool ModulePlayer::Start()
 	vehicle = App->physics->AddVehicle(car);
 	vehicle->SetPos(0, 12, 10);
 
-	n.SetPos(0, 0, 0);
-	n.size = 1;
+
 	turret = App->physics->AddBody(n, 1);
-	btVector3 sphereanchor(0,-n.size.y/2, 0);
+	btVector3 sphereanchor(0,-n.size.y, 0);
 	btVector3 vehicleanchor(0, 2, 0);
 	btVector3 axisns(0,1, 0);
 	App->physics->Add_Hinge_Constraint(*vehicle->GetRigidBody(), *turret->GetRigidBody(), vehicleanchor, sphereanchor, axisns, axisns, true);
 
-
+	btVector3 cannonanchor(-canon.height, 0, 0);
+	btVector3 turretanchor(0, -n.size.y/2, 0);
+	btVector3 axisnturretcanon(0, 0, 1);
+	canon.height = 2.5;
+	canon.radius = 0.5;
+	canonbody = App->physics->AddBody(canon, 1);
+	App->physics->Add_Hinge_Constraint(*turret->GetRigidBody(), *canonbody->GetRigidBody(), turretanchor, cannonanchor, axisnturretcanon, axisnturretcanon, true);
 
 	return true;
 }
@@ -131,7 +136,7 @@ update_status ModulePlayer::Update(float dt)
 	{
 		acceleration = MAX_ACCELERATION;
 	}
-
+	
 	if(App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
 	{
 		if(turn < TURN_DEGREES)
@@ -156,8 +161,12 @@ update_status ModulePlayer::Update(float dt)
 	vehicle->ApplyEngineForce(acceleration);
 	vehicle->Turn(turn);
 	vehicle->Brake(brake);
-
+	
 	vehicle->Render();
+	turret->GetTransform(&n.transform);
+	n.Render();
+	canonbody->GetTransform(&canon.transform);
+	canon.Render();
 
 	char title[80];
 	sprintf_s(title, "%.1f Km/h", vehicle->GetKmh());

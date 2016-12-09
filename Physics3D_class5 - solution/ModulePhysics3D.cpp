@@ -130,7 +130,9 @@ update_status ModulePhysics3D::Update(float dt)
 		if(App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
 		{
 			Sphere s(1);
-			s.SetPos(App->camera->Position.x, App->camera->Position.y, App->camera->Position.z);
+			float *mat = new float[16];
+			App->player->canonbody->GetTransform(mat);
+			s.SetPos(mat[12], mat[13], mat[14]);
 			float force = 30.0f;
 			AddBody(s)->Push(-(App->camera->Z.x * force), -(App->camera->Z.y * force), -(App->camera->Z.z * force));
 		}
@@ -344,6 +346,16 @@ void ModulePhysics3D::AddConstraintP2P(PhysBody3D& bodyA, PhysBody3D& bodyB, con
 	constraints.add(p2p);
 	p2p->setDbgDrawSize(2.0f);
 }
+
+btPoint2PointConstraint* ModulePhysics3D::Add_P2P_Constraint(btRigidBody& rbA, btRigidBody& rbB, const btVector3& pivotInA, const btVector3& pivotInB, bool disablecollision)
+{
+
+	btPoint2PointConstraint* constrain = new btPoint2PointConstraint(rbA, rbB, pivotInA, pivotInB);
+	world->addConstraint(constrain, disablecollision);
+	constraints.add(constrain);
+	return constrain;
+}
+
 
 btHingeConstraint* ModulePhysics3D::Add_Hinge_Constraint(btRigidBody& rbA, btRigidBody& rbB, const btVector3& pivotInA, const btVector3& pivotInB, btVector3& axisInA, btVector3& axisInB, bool disablecollision)
 {

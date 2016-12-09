@@ -22,6 +22,8 @@ public:
 public:
 	Cube n;
 	PhysBody3D* turret;
+	Cylinder canon;
+	PhysBody3D* canonbody;
 	PhysVehicle3D* vehicle;
 	float turn;
 	float acceleration;

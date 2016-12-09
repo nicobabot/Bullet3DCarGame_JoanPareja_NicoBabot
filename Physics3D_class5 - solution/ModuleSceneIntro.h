@@ -5,7 +5,7 @@
 #include "Primitive.h"
 
 #define MAX_SNAKE 2
-
+#define MAX_CUBE 50
 struct PhysBody3D;
 struct PhysMotor3D;
 
@@ -45,21 +45,13 @@ public:
 
 	Sphere n;
 	PhysBody3D* turret;
+	p2DynArray<Cube> MyCubeMap;
+	p2DynArray<PhysBody3D*> MyPhysbodyCubeMap;
+	
+	p2DynArray<Sphere> MySphereObj;
+	p2DynArray<PhysBody3D*> MyPhysbodySphereobj;
 
-	Cube cub1;
-	PhysBody3D*bodcub1;
-	Cube cub2;
-	PhysBody3D*bodcub2;
-	Cube cub3;
-	PhysBody3D*bodcub3;
-	Cube cub4;
-	PhysBody3D*bodcub4;
-	Cube cub5;
-	PhysBody3D*bodcub5;
-	Cube cub6;
-	PhysBody3D*bodcub6;
-	Cube cub7;
-	PhysBody3D*bodcub7;
-	Cube cub8;
-	PhysBody3D*bodcub8;
+	p2DynArray<Cube> MyCubeObj;
+	p2DynArray<PhysBody3D*> MyPhysbodyCubeobj;
+	
 };
