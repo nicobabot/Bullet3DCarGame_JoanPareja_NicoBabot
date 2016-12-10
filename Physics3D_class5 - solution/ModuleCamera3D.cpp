@@ -61,9 +61,9 @@ update_status ModuleCamera3D::Update(float dt)
 	Position += newPos;
 	Reference += newPos;
 	*/
-	//Position = App->player->vehicle;
+
+
 	btVector3 temp = App->player->vehicle->vehicle->getChassisWorldTransform().getOrigin();
-	//App->player->vehicle->vehicle->getChassisWorldTransform().getBasis();
 
 	float* tempC = new float[16];
 	App->player->vehicle->vehicle->getChassisWorldTransform().getOpenGLMatrix(tempC);
@@ -74,35 +74,42 @@ update_status ModuleCamera3D::Update(float dt)
 	Position.y = temp.getY();
 	Position.z = temp.getZ();
 
-	Position += C*vec3(0, 3, 10);
+	Position += C*vec3(0, 3, -10);
+
+	LookAt(vec3(temp.getX(), temp.getY(), temp.getZ()));
 
 
-
+	/*
 	btQuaternion qtemp = App->player->vehicle->vehicle->getChassisWorldTransform().getRotation();
-	float angle = qtemp.getAngle();
+	
+	//Just getting the rotation quaternion to floats for easiest calcu
 	float q0 = qtemp.getW();
 	float q1 = qtemp.getX();
 	float q2 = qtemp.getY();
-	float q3 = qtemp.getZ();
-	//vec3 axis(qtemp.getAxis().getX(), qtemp.getAxis().getY(), qtemp.getAxis().getZ())
+	float q3 = qtemp.getZ();;
 
 	//Get Rotation Matrix
-	R[0] = (q0*q0 + q1*q1 - q2*q2 - q3*q3);
-	R[1] = (2 * q1*q2 + 2 * q0*q3);
-	R[2] = (2 * q1*q3 - 2 * q0*q2);
-	R[3] = (2 * q1*q2 - 2 * q0*q3);
-	R[4] = (q0*q0 - q1*q1 + q2*q2 - q3*q3);
-	R[5] = (2 * q2*q3 + 2 * q0*q1);
-	R[6] = (2 * q1*q3 + 2 * q0*q2);
-	R[7] = (2 * q2*q3 - 2 * q0*q1);
-	R[8] = (q0*q0 - q1*q1 - q2*q2 + q3*q3);
+//	R[0] = (q0*q0 + q1*q1 - q2*q2 - q3*q3);
+//	R[1] = (2 * q1*q2 + 2 * q0*q3);
+//	R[2] = (2 * q1*q3 - 2 * q0*q2);
+//	R[3] = (2 * q1*q2 - 2 * q0*q3);
+//	R[4] = (q0*q0 - q1*q1 + q2*q2 - q3*q3);
+//	R[5] = (2 * q2*q3 + 2 * q0*q1);
+//	R[6] = (2 * q1*q3 + 2 * q0*q2);
+//	R[7] = (2 * q2*q3 - 2 * q0*q1);
+//	R[8] = (q0*q0 - q1*q1 - q2*q2 + q3*q3);
 
 	R = transpose(R);
-	
+	//180º rotation 
+	mat3x3 fix(-1,0,0,0,1,0,0,0,-1);
+
+	R = fix*R;
 	//Saving in case we need them later
 	X = vec3(R[0], R[3], R[6]);
 	Y = vec3(R[1], R[4], R[7]);
 	Z = vec3(R[2], R[5], R[8]);
+	*/
+
 
 
 	// Mouse motion ----------------
