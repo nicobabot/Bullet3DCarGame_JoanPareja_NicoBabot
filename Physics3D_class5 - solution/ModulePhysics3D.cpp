@@ -141,7 +141,7 @@ update_status ModulePhysics3D::Update(float dt)
 			int xmouse = App->input->GetMouseX();
 			int ymouse = App->input->GetMouseY();
 
-			sbody->Push(Position.x * force, Position.y * force, Position.z*force);
+			sbody->Push(xmouse*force, ymouse*force, 10 * force);
 			CanonBallsBody.PushBack(sbody);
 			
 		}
