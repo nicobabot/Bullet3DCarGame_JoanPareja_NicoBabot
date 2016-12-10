@@ -1,2 +1,4 @@
-﻿  3D Physics.vcxproj -> C:\Users\nico\Desktop\2ndo VJ\FISICA\Bullet3DCarGame_JoanPareja_NicoBabot\Physics3D_class5 - solution\Debug\3D Physics - class5.exe
-  3D Physics.vcxproj -> C:\Users\nico\Desktop\2ndo VJ\FISICA\Bullet3DCarGame_JoanPareja_NicoBabot\Physics3D_class5 - solution\Debug\3D Physics - class5.pdb (Full PDB)
+﻿  ModulePhysics3D.cpp
+c:\users\nico\desktop\2ndo vj\fisica\3dbulletfisica\bullet3dcargame_joanpareja_nicobabot\physics3d_class5 - solution\modulephysics3d.cpp(182): warning C4018: '<': signed/unsigned mismatch
+  3D Physics.vcxproj -> C:\Users\nico\Desktop\2ndo VJ\FISICA\3DBULLETFISICA\Bullet3DCarGame_JoanPareja_NicoBabot\Physics3D_class5 - solution\Debug\3D Physics - class5.exe
+  3D Physics.vcxproj -> C:\Users\nico\Desktop\2ndo VJ\FISICA\3DBULLETFISICA\Bullet3DCarGame_JoanPareja_NicoBabot\Physics3D_class5 - solution\Debug\3D Physics - class5.pdb (Full PDB)

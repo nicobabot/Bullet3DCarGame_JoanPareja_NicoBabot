@@ -112,8 +112,9 @@ update_status ModulePhysics3D::PreUpdate(float dt)
 // ---------------------------------------------------------
 update_status ModulePhysics3D::Update(float dt)
 {
-	if(App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
+	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN) {
 		debug = !debug;
+	}
 
 	if(debug == true)
 	{
@@ -133,11 +134,23 @@ update_status ModulePhysics3D::Update(float dt)
 			float *mat = new float[16];
 			App->player->canonbody->GetTransform(mat);
 			s.SetPos(mat[12], mat[13], mat[14]);
-			float force = 30.0f;
-			AddBody(s)->Push(-(App->camera->Z.x * force), -(App->camera->Z.y * force), -(App->camera->Z.z * force));
+			float force = 0.01f;
+			PhysBody3D *sbody;
+			sbody = AddBody(s, 1);
+			CanonBallsSpheres.PushBack(s);
+			int xmouse = App->input->GetMouseX();
+			int ymouse = App->input->GetMouseY();
+
+			sbody->Push(Position.x * force, Position.y * force, Position.z*force);
+			CanonBallsBody.PushBack(sbody);
+			
 		}
 	}
 
+	for (int i = 0; i < CanonBallsBody.Count(); i++) {
+		CanonBallsSpheres[i].Render();
+		CanonBallsBody[i]->GetTransform(&CanonBallsSpheres[i].transform);
+	}
 	return UPDATE_CONTINUE;
 }
 
@@ -186,6 +199,7 @@ bool ModulePhysics3D::CleanUp()
 		delete item->data;
 
 	vehicles.clear();
+	
 
 	delete vehicle_raycaster;
 	delete world;
